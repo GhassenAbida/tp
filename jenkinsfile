@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Pull from GitHub') {
+            steps {
+                // Pull code from GitHub
+                git branch: 'main', url: 'https://github.com/GhassenAbida/tp.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                // Build Docker image
+                sh 'docker build -t MyImage .'
+            }
+        }
+
+        stage('Push to DockerHub') {
+            steps {
+                // Push Docker image to DockerHub
+                withCredentials([usernamePassword(credentialsId: 'your-dockerhub-credentials', usernameVariable: 'ghassena', passwordVariable: 'azizna8ar')]) {
+                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                }
+                sh 'docker push MyImage'
+            }
+        }
+    }
+}
