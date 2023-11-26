@@ -16,14 +16,5 @@ pipeline {
             }
         }
 
-        stage('Push to DockerHub') {
-            steps {
-                // Push Docker image to DockerHub
-                withCredentials([usernamePassword(credentialsId: 'your-dockerhub-credentials', usernameVariable: 'ghassena', passwordVariable: 'azizna8ar')]) {
-                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
-                }
-                sh 'docker push MyImage'
-            }
-        }
-    }
+        
 }
