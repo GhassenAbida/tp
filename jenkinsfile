@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+
+    environment {
+        KUBE_CONFIG_FILE = credentials('kubeconfig')
+
+
+    }
+
     stages {
         stage('Pull from GitHub') {
             steps {
@@ -21,6 +28,14 @@ pipeline {
                 sh 'docker login -u ghassenlbabida -p ghassen123 '
                 sh 'docker tag my-image ghassenlbabida/my-image:latest'
                 sh 'docker push ghassenlbabida/my-image:latest'
+            }
+        }
+
+        stage('k8s') {
+            steps {
+
+                sh 'export KUBECONFIG=$KUBE_CONFIG_FILE'
+                sh 'kubectl run myapp --image=ghassenlbabida/my-image:latest'
             }
         }
 
