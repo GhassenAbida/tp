@@ -15,6 +15,14 @@ pipeline {
                 sh 'docker build -t my-image .'
             }
         }
+        stage('Push Docker Image') {
+            steps {
+                // Push Docker image
+                sh 'docker login -u ghassenlbabida -p ghassen123 '
+                sh 'docker tag my-image ghassenlbabida/my-image:latest'
+                sh 'docker push ghassenlbabida/my-image:latest'
+            }
+        }
 
         }
 }
