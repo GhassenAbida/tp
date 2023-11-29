@@ -50,8 +50,8 @@ pipeline {
 
                 sh ' helm repo add prometheus-community https://prometheus-community.github.io/helm-charts '
                 sh ' helm repo update'
-                sh ' kubectl create ns monitoring' 
-                sh ' helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring '
+                sh ' kubectl create ns monitor' 
+                sh ' helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitor '
             }
         }
 
