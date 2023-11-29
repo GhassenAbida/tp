@@ -17,31 +17,31 @@ pipeline {
         }
 
     
-        stage('sonarqube_scanner') {
-            steps {
-                sh '/opt/sonar-scanner-5.0.1.3006/bin/sonar-scanner   -Dsonar.projectKey=ghassen   -Dsonar.sources=.   -Dsonar.host.url=http://172.17.0.1:9000   -Dsonar.token=sqp_97e55582584aff36da2e870c0499239edf7ac991 '
-            }
-        }
+        //stage('sonarqube_scanner') {
+            // steps {
+            //    sh '/opt/sonar-scanner-5.0.1.3006/bin/sonar-scanner   -Dsonar.projectKey=ghassen   -Dsonar.sources=.   -Dsonar.host.url=http://172.17.0.1:9000   -Dsonar.token=sqp_97e55582584aff36da2e870c0499239edf7ac991 '
+          //  }
+        //}
 
-        stage('Build Docker Image') {
-            steps {
+        //stage('Build Docker Image') {
+           // steps {
                 // Build Docker image
-                sh 'docker build -t my-image .'
-            }
-        }
-        stage('Push Docker Image') {
-            steps {
-                // Push Docker image
-                sh 'docker login -u ghassenlbabida -p ghassen123 '
-                sh 'docker tag my-image ghassenlbabida/my-image:latest'
-                sh 'docker push ghassenlbabida/my-image:latest'
-            }
-        }
+         //       sh 'docker build -t my-image .'
+       //     }
+      //  }
+       // stage('Push Docker Image') {
+     //       steps {
+   //             // Push Docker image
+  //              sh 'docker login -u ghassenlbabida -p ghassen123 '
+ //               sh 'docker tag my-image ghassenlbabida/my-image:latest'
+ //               sh 'docker push ghassenlbabida/my-image:latest'
+ //           }
+ //       }
 
         stage('k8s') {
             steps {
 
-                sh ' export KUBECONFIG=$KUBE_CONFIG_FILE && kubectl run myapp --image=ghassenlbabida/my-image:latest '
+                sh ' export KUBECONFIG=$KUBE_CONFIG_FILE && kubectl run my-second-app --image=ghassenlbabida/my-image:latest '
             }
         }
 
