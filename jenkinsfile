@@ -41,7 +41,7 @@ pipeline {
         stage('k8s') {
             steps {
 
-                sh ' export KUBECONFIG=$KUBE_CONFIG_FILE && kubectl run my-second-app --image=ghassenlbabida/my-image:latest '
+                sh ' export KUBECONFIG=$KUBE_CONFIG_FILE && kubectl run my-third-app --image=ghassenlbabida/my-image:latest '
             }
         }
 
