@@ -45,15 +45,15 @@ pipeline {
             }
         }
 
-        stage('prometheus & grafana') {
-            steps {
+     //   stage('prometheus & grafana') {
+       //     steps {
 
-                sh ' helm repo add prometheus-community https://prometheus-community.github.io/helm-charts '
-                sh ' helm repo update'
-                sh ' kubectl create ns monitoring' 
-                sh ' helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring'
-            }
-        }
+         //       sh ' helm repo add prometheus-community https://prometheus-community.github.io/helm-charts '
+           //     sh ' helm repo update'
+             //   sh ' kubectl create ns monitoring' 
+               // sh ' helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring'
+           // }
+        //}
 
 
 
