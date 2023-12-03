@@ -1,0 +1,7 @@
+# playbook.yml
+- name: Sample Ansible Playbook for AKS Deployment
+  hosts: all
+  tasks:
+    - name: Echo a message
+      ansible.builtin.debug:
+        msg: "This is a sample task. Replace with real deployment tasks."
