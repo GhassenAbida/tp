@@ -37,6 +37,18 @@ pipeline {
  //               sh 'docker push ghassenlbabida/my-image:latest'
  //           }
  //       }
+// stage('Terraform Init and Plan') {
+          //  steps {
+            //    sh 'terraform init -input=false'
+              //  sh 'terraform plan -input=false -out=tfplan'
+            //}
+        //}
+
+        //stage('Terraform Apply') {
+          //  steps {
+            //    sh 'terraform apply -input=false -auto-approve tfplan'
+            //}
+        //}
 
         stage('k8s') {
             steps {
