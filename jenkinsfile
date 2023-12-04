@@ -83,7 +83,7 @@ pipeline {
             sh 'helm repo update'
             sh 'kubectl create ns monitoring'
             sh 'helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring'
-        } catch (Exception e) {
+        } catch (ex) {
              echo " the pipeline will continue."
         }
     }
