@@ -40,7 +40,7 @@ pipeline {
  stage('Terraform Init and Plan') {
             steps {
                 sh 'terraform init -input=false'
-                sh 'terraform plan -input=false -out=tfplan'
+             //   sh 'terraform plan -input=false -out=tfplan'
             }
         }
 
