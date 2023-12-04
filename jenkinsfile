@@ -76,15 +76,20 @@ pipeline {
             }
         }
 
-     //   stage('prometheus & grafana') {
-       //     steps {
+  stage('prometheus & grafana') {
+    steps {
+        try {
+            sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
+            sh 'helm repo update'
+            sh 'kubectl create ns monitoring'
+            sh 'helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring'
+        } catch (Exception e) {
+            // Handle any exceptions or errors that occur within the steps
+            // You can print an error message or take other appropriate actions here
+        }
+    }
+}
 
-         //       sh ' helm repo add prometheus-community https://prometheus-community.github.io/helm-charts '
-           //     sh ' helm repo update'
-             //   sh ' kubectl create ns monitoring' 
-               // sh ' helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring'
-           // }
-        //}
 }
 post {
         always {
