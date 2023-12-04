@@ -86,7 +86,12 @@ pipeline {
            // }
         //}
 
-
+post {
+        always {
+            // This block will always execute, regardless of the build status
+            junit '**/test-results/*.xml' // Adjust the path to your test results
+            // Other post-build actions
+        }
 
         }
 }
