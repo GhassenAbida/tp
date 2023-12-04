@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "prettify": "prettier -l --write \"**/*.js\"",
-    "test": "jest",
+    "test": "jest --ci --reporters=default --reporters=jest-junit --outputDirectory=./test-results --outputName=junit.xml",
     "dev": "nodemon -L src/index.js"
   },
   "dependencies": {
@@ -14,8 +14,17 @@
     "sqlite3": "^5.1.2",
     "uuid": "^9.0.0",
     "wait-port": "^1.0.4",
-    "jest": "^26.6.3", 
+    "jest": "^26.6.3",
     "supertest": "^6.1.3"
+  },
+  "devDependencies": {
+    "jest": "^29.3.1",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.7.1"
+  },
+  "jest": {
+    "reporters": ["default", "jest-junit"],
+    "testResultsProcessor": "jest-junit"
   },
   "resolutions": {
     "ansi-regex": "5.0.1"
@@ -26,10 +35,5 @@
     "useTabs": false,
     "semi": true,
     "singleQuote": true
-  },
-  "devDependencies": {
-    "jest": "^29.3.1",
-    "nodemon": "^2.0.20",
-    "prettier": "^2.7.1"
   }
 }
