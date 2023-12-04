@@ -34,7 +34,7 @@ pipeline {
                 // Push Docker image
                 sh 'docker login -u ghassenlbabida -p ghassen123 '
                 sh 'docker tag g ghassenlbabida/g:latest'
-                sh 'docker push ghassenlbabida/g:latest'
+                sh 'docker push g ghassenlbabida/g:latest'
             }
         }
  stage('Terraform Init and Plan') {
