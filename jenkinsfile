@@ -28,7 +28,7 @@ pipeline {
                 // Build Docker image
                 sh 'docker build -t myimage .'
          }
-      //  }
+       }
        // stage('Push Docker Image') {
      //       steps {
    //             // Push Docker image
