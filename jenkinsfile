@@ -80,7 +80,7 @@ pipeline {
                 sh 'ansible-playbook -i inventory.yml playbook.yml'
             } catch (ex) {
                 // Handle the exception here
-                echo "An error occurred during Ansible Deployment: ${e.getMessage()}"
+                echo "An error occurred during Ansible Deployment"
                
             }
         }
