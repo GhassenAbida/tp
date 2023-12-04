@@ -15,6 +15,19 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/GhassenAbida/tp.git'
             }
         }
+ stage('Run Tests') {
+            steps {
+                script {
+                    try {
+                        sh 'npm install'
+                        sh 'npm test'
+                    } catch (ex) {
+                        // Test failed, but we're catching the error to not fail the build
+                        echo "Tests failed, but the pipeline will continue."
+                    }
+                }
+            }
+        }
 
     
        stage('sonarqube_scanner') {
@@ -49,19 +62,7 @@ pipeline {
             //                 sh 'terraform apply -input=false -auto-approve tfplan'
             //                      }
         //                    }
-  stage('Run Tests') {
-            steps {
-                script {
-                    try {
-                        sh 'npm install'
-                        sh 'npm test'
-                    } catch (ex) {
-                        // Test failed, but we're catching the error to not fail the build
-                        echo "Tests failed, but the pipeline will continue."
-                    }
-                }
-            }
-        }
+ 
         stage('k8s') {
             steps {
 
