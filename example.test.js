@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('./index'); // Import your main app file
+const app = require('./src/index'); // Import your main app file
 
 describe('GET /items', () => {
   it('responds with JSON', async () => {
