@@ -29,14 +29,14 @@ pipeline {
                 sh 'docker build -t g .'
          }
        }
-        stage('Push Docker Image') {
-            steps {
+      //  stage('Push Docker Image') {
+            //steps {
                 // Push Docker image
-                sh 'docker login -u ghassenlbabida -p ghassen123 '
-                sh 'docker tag g ghassenlbabida/g:latest'
-                sh 'docker push ghassenlbabida/g:latest'
-            }
-        }
+                //sh 'docker login -u ghassenlbabida -p ghassen123 '
+              //  sh 'docker tag g ghassenlbabida/g:latest'
+            //    sh 'docker push ghassenlbabida/g:latest'
+          //  }
+        //}
  stage('Terraform Init and Plan') {
             steps {
                 sh 'terraform init -input=false'
