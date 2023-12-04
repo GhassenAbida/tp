@@ -58,7 +58,7 @@ pipeline {
         stage('k8s') {
             steps {
 
-                sh ' export KUBECONFIG=$KUBE_CONFIG_FILE && kubectl run mmp --image=ghassenlbabida/my-image:latest '
+                sh ' export KUBECONFIG=$KUBE_CONFIG_FILE && kubectl run mmmp --image=ghassenlbabida/my-image:latest '
             }
         }
      stage('Ansible Deployment') {
