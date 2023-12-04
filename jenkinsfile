@@ -51,7 +51,7 @@ pipeline {
         //}
   stage('Run Tests') {
             steps {
-               
+                sh 'npm install'
                 sh 'npm test'    // Runs tests using Jest
             }
         }
