@@ -1,12 +1,13 @@
 const request = require('supertest');
-const app = require('./app'); // Import the Express app
+const app = require('./index'); // Import your main app file
 
 describe('GET /items', () => {
   it('responds with JSON', async () => {
-    const response = await request(app).get('/items');
-    expect(response.statusCode).toBe(200);
-    expect(response.type).toBe('application/json');
+    const response = await request(app)
+      .get('/items')
+      .expect('Content-Type', /json/)
+      .expect(200);
+
     // Add more assertions as needed, depending on your actual response structure
   });
 });
-
