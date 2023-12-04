@@ -49,11 +49,16 @@ pipeline {
             //    sh 'terraform apply -input=false -auto-approve tfplan'
             //}
         //}
-
+  stage('Run Tests') {
+            steps {
+                sh 'npm install' // Installs project dependencies, including Jest
+                sh 'npm test'    // Runs tests using Jest
+            }
+        }
         stage('k8s') {
             steps {
 
-                sh ' export KUBECONFIG=$KUBE_CONFIG_FILE && kubectl run mp --image=ghassenlbabida/my-image:latest '
+                sh ' export KUBECONFIG=$KUBE_CONFIG_FILE && kubectl run mmp --image=ghassenlbabida/my-image:latest '
             }
         }
      stage('Ansible Deployment') {
