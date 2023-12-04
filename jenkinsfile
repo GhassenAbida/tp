@@ -73,13 +73,20 @@ pipeline {
                 sh ' export KUBECONFIG=$KUBE_CONFIG_FILE && kubectl run imen --image=ghassenlbabida/my-image:latest '
             }
         }
-     stage('Ansible Deployment') {
-            steps {
+   stage('Ansible Deployment') {
+    steps {
+        script {
+            try {
+                sh 'ansible-playbook -i inventory.yml playbook.yml'
+            } catch (ex) {
+                // Handle the exception here
+                echo "An error occurred during Ansible Deployment: ${e.getMessage()}"
                
-                    sh 'ansible-playbook -i inventory.yml playbook.yml'
-                
             }
         }
+    }
+}
+
 
   stage('prometheus & grafana') {
     steps {
