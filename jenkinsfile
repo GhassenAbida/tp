@@ -78,6 +78,7 @@ pipeline {
 
   stage('prometheus & grafana') {
     steps {
+       script{
         try {
             sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
             sh 'helm repo update'
@@ -86,6 +87,7 @@ pipeline {
         } catch (ex) {
              echo " the pipeline will continue."
         }
+}
     }
 }
 
