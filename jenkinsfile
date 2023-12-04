@@ -92,6 +92,6 @@ post {
             junit '**/test-results/*.xml' // Adjust the path to your test results
             // Other post-build actions
         }
-
+}
         }
 }
