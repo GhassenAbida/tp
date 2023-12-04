@@ -23,11 +23,11 @@ pipeline {
           //  }
         //}
 
-        //stage('Build Docker Image') {
-           // steps {
+        stage('Build Docker Image') {
+            steps {
                 // Build Docker image
-         //       sh 'docker build -t my-image .'
-       //     }
+                sh 'docker build -t myimage .'
+         }
       //  }
        // stage('Push Docker Image') {
      //       steps {
