@@ -44,7 +44,7 @@ pipeline {
        }
         stage('Push Docker Image') {
             steps {
-                 Push Docker image
+                 //Push Docker image
                 sh 'docker login -u ghassenlbabida -p ghassen123 '
                 sh 'docker tag application ghassenlbabida/application:latest'
                 sh 'docker push ghassenlbabida/application:latest'
