@@ -26,23 +26,23 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Build Docker image
-                sh 'docker build -t myge .'
+                sh 'docker build -t g .'
          }
        }
-       // stage('Push Docker Image') {
-     //       steps {
-   //             // Push Docker image
-  //              sh 'docker login -u ghassenlbabida -p ghassen123 '
- //               sh 'docker tag my-image ghassenlbabida/my-image:latest'
- //               sh 'docker push ghassenlbabida/my-image:latest'
- //           }
- //       }
-// stage('Terraform Init and Plan') {
-          //  steps {
-            //    sh 'terraform init -input=false'
-              //  sh 'terraform plan -input=false -out=tfplan'
-            //}
-        //}
+        stage('Push Docker Image') {
+            steps {
+                // Push Docker image
+                sh 'docker login -u ghassenlbabida -p ghassen123 '
+                sh 'docker tag my-image ghassenlbabida/g:latest'
+                sh 'docker push ghassenlbabida/g:latest'
+            }
+        }
+ stage('Terraform Init and Plan') {
+            steps {
+                sh 'terraform init -input=false'
+                sh 'terraform plan -input=false -out=tfplan'
+            }
+        }
 
         //stage('Terraform Apply') {
           //  steps {
