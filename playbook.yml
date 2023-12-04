@@ -1,7 +1,65 @@
-# playbook.yml
+---
 - name: Sample Ansible Playbook for AKS Deployment
   hosts: all
+  gather_facts: no  # Disable gathering facts if not needed to speed up the process
+
+  vars:
+    kube_config_path: "~/.kube/config"  # Path to the kubeconfig file
+    image_name: "image"
+    image_tag: "latest"  
+    deployment_name: "my-app"
+    namespace: "ns"
+
   tasks:
-    - name: Echo a message
-      ansible.builtin.debug:
-        msg: "This is a sample task. Replace with real deployment tasks."
+    - name: Set up Kubectl
+      ansible.builtin.shell: |
+        curl -LO "https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl"
+        chmod +x ./kubectl
+        sudo mv ./kubectl /usr/local/bin/kubectl
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Deploy to AKS
+      community.kubernetes.k8s:
+        kubeconfig: "{{ kube_config_path }}"
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: "{{ deployment_name }}"
+            namespace: "{{ namespace }}"
+          spec:
+            replicas: 3  # Number of replicas
+            selector:
+              matchLabels:
+                app: "{{ deployment_name }}"
+            template:
+              metadata:
+                labels:
+                  app: "{{ deployment_name }}"
+              spec:
+                containers:
+                  - name: "{{ deployment_name }}"
+                    image: "{{ image_name }}:{{ image_tag }}"
+                    ports:
+                      - containerPort: 80  # Adjust the container port
+
+    - name: Ensure service is running
+      community.kubernetes.k8s:
+        kubeconfig: "{{ kube_config_path }}"
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: "{{ deployment_name }}"
+            namespace: "{{ namespace }}"
+          spec:
+            selector:
+              app: "{{ deployment_name }}"
+            ports:
+              - protocol: TCP
+                port: 80  # Adjust the service port
+                targetPort: 80
+            type: LoadBalancer
+
